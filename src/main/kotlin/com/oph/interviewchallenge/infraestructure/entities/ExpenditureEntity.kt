@@ -1,5 +1,6 @@
 package com.oph.interviewchallenge.infraestructure.entities
 
+import com.oph.interviewchallenge.domain.transactions.Expenditure
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.*
@@ -26,4 +27,19 @@ class ExpenditureEntity(
 
     @ManyToOne
     val financialStatement: FinancialStatementEntity? = null,
-)
+) {
+    companion object {
+        fun from(expenditure: Expenditure, financialStatement: FinancialStatementEntity) = ExpenditureEntity(
+            description = expenditure.description,
+            amount = expenditure.amount,
+            date = expenditure.date,
+            financialStatement = financialStatement
+        )
+    }
+
+    fun toDomain() = Expenditure(
+        description = description,
+        amount = amount,
+        date = date
+    )
+}
