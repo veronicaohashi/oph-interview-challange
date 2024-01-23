@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+!build/libs/interview-challenge-0.0.1.jar
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

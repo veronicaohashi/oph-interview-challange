@@ -12,3 +12,22 @@ services:
       - 5432:5432
     volumes:
       - ./docker-data:/var/lib/postgresql/data
+    networks:
+      - interview_challenge_network
+
+  application:
+    container_name: interview_challenge_application
+    image: oph/interview_challenge_application
+    build:
+      context: .
+    environment:
+      - DATABASE_URL=jdbc:postgresql://interview_challenge_postgres:5432/interview_challenge?user=admin&password=admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - interview_challenge_network
+
+networks:
+  interview_challenge_network:
