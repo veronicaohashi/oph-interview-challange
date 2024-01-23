@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: interview_challenge_postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=interview_challenge
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker-data:/var/lib/postgresql/data
