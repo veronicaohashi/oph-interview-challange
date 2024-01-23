@@ -1,6 +1,7 @@
 package com.oph.interviewchallenge.controller
 
 import com.oph.interviewchallenge.controller.request.CreateFinancialStatementRequest
+import com.oph.interviewchallenge.controller.response.SearchFinancialStatementResponse
 import com.oph.interviewchallenge.domain.FinancialStatement
 import com.oph.interviewchallenge.domain.transactions.Expenditure
 import com.oph.interviewchallenge.domain.transactions.Income
@@ -10,14 +11,18 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
 @RequestMapping("/financial-statements")
+@CrossOrigin
 class FinancialStatementsController(
     private val financialStatementRepository: FinancialStatementRepository
 ) {
@@ -55,6 +60,13 @@ class FinancialStatementsController(
         return ResponseEntity(updatedFinancialStatement.toDomain(), HttpStatus.CREATED)
     }
 
+    @GetMapping
+    fun search(@RequestParam(value = "personId", required = true) personId: String): ResponseEntity<SearchFinancialStatementResponse> {
+        val financialStatement = financialStatementRepository.findByPersonId(personId)?.toDomain()
+            ?: throw RuntimeException("Financial statement not found for the given personId: $personId")
+
+        return ResponseEntity(SearchFinancialStatementResponse.from(financialStatement), HttpStatus.OK)
+    }
 
 
 }

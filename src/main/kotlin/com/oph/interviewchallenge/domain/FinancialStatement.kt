@@ -27,7 +27,9 @@ data class FinancialStatement(
         }
     }
 
-    private fun totalIncome() = transactions.filterIsInstance<Income>().sumOf { it.amount }
+    fun disposableIncome() = totalIncome() - totalExpenditure()
+
+    fun totalIncome() = transactions.filterIsInstance<Income>().sumOf { it.amount }
 
     fun totalExpenditure() = transactions.filterIsInstance<Expenditure>().sumOf { it.amount }
 }
