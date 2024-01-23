@@ -25,7 +25,7 @@ data class FinancialStatement(
         logger.info("TotalIncome: ${totalIncome()}")
         logger.info("TotalExpenditure: ${totalExpenditure()}")
 
-        val ratio = totalExpenditure().divide(totalIncome(), 2, RoundingMode.HALF_UP).toDouble()
+        val ratio = totalExpenditure().divide(totalIncome(),2, RoundingMode.DOWN).toDouble()
         logger.info("Ratio: $ratio")
 
         return when {

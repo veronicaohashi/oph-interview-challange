@@ -39,12 +39,12 @@ class FinancialStatementTest {
             transactions = listOf(
                 Income(
                     description = "Salary",
-                    amount = BigDecimal("1000"),
+                    amount = BigDecimal("1000.10"),
                     date = LocalDate.parse("2024-02-24")
                 ),
                 Expenditure(
                     description = "Rent",
-                    amount = BigDecimal("299"),
+                    amount = BigDecimal("299.9"),
                     date = LocalDate.parse("2024-02-24")
                 )
             )
