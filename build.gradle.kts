@@ -41,3 +41,10 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+flyway {
+	url = "jdbc:postgresql://localhost:5432/interview_challenge"
+	user = "admin"
+	password = "admin"
+	cleanDisabled = false
+}
